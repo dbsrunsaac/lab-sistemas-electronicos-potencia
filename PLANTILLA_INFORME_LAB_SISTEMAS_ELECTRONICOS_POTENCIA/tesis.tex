@@ -1,0 +1,103 @@
+%============================================================================
+%      PLANTILLA LABORATORIO DE INSTRUMENTACÍON ELECTRÓNICA 
+%               INGENIERÍA ELECTRONICA - UNSAAC
+%============================================================================
+
+\documentclass[a4paper,12pt]{book}
+
+\renewcommand{\rmdefault}{phv}  % Cambiar la fuente a Helvetica (similar a Arial)
+\renewcommand{\sfdefault}{phv}  % Cambiar la fuente sans-serif a Helvetica
+
+\usepackage{./estilos/estiloBase}
+\usepackage{./estilos/colores}  
+\usepackage{./estilos/comandos} 
+
+
+
+\addbibresource{bib.bib}
+
+
+%\input{Anexo-Siglas.tex}
+
+
+%%%% PARA LA NOMENCLATURA
+\renewcommand{\nomgroup}[1]{%
+\ifthenelse{\equal{#1}{A}}{\item[\textbf{T\'erminos Comunes}]}{%
+\ifthenelse{\equal{#1}{B}}{\item[\textbf{Caso: URLLC y eMBB}]}{%\\     SE CAMBIA "ESCENARIO" POR "CASO"
+\ifthenelse{\equal{#1}{C}}{\item[\textbf{Caso: URLLC y mMTC}]}{%
+\ifthenelse{\equal{#1}{D}}{\item[\textbf{Escenario 3}]}{}}}}
+}
+
+
+\begin{document}
+
+
+
+\setlength{\parskip}{4mm}	% Separaci??n de los p??rrafos
+\overfullrule=2cm			% Muestra una l??nea negra en el borde de la
+							% p??gina cuando se superen los m??rgentes
+\sloppy						% permite espacios m??s grandes de lo normal
+							% para cuadrar las l??neas
+
+%====================== CITAS ============================
+\hypersetup{				%Requerido para configurar el comportamiento de los enlaces en el documento
+     colorlinks=true,		%Color enlaces (es decir, no más cuadros alrededor de los enlaces)
+     linkcolor=blue,		%los enlaces a los archivos locales se establecen en color xxxxxx
+     filecolor= yellow,	
+     citecolor = blue,  	%color de enlace de citas
+     linkbordercolor=white,
+     urlcolor=blue,
+     pdfborderstyle={/S/U/W 1}}
+%====================== CITAS ============================
+
+%\pagestyle{empty}
+\input{0-portada.tex}
+%\cleardoublepage
+
+%\chapter*{Agradecimientos}
+%\input{0.1-Agradecimientos}
+%\cleardoublepage
+
+%\frontmatter % Introducci??n, ??ndices ...
+%\pagestyle{plain}
+%\input{0.2-Abstract.tex}
+%\cleardoublepage
+
+%\tableofcontents
+%\cleardoublepage
+%\phantomsection
+
+%\addcontentsline{toc}{chapter}{Resumen}
+%\addcontentsline{toc}{chapter}{Abstract}
+%\addcontentsline{toc}{chapter}{Resum}
+
+%\listoftables
+%\listoffigures
+
+%\mainmatter % Contenido en si ...
+
+%\chapter{Introducci\'on}\label{cap:Introduccion}
+\input{1-Introduccion.tex}
+
+
+
+
+
+
+
+
+%%% ESTILO APA %%%%%
+%--------------------
+
+\printbibliography
+%\bibliographystyle{apalike}
+%\bibliography{bib.bib}
+%\printbibliography
+
+\printglossary[type=\acronymtype, title={Lista de Abreviaturas}, toctitle={Lista de Abreviaturas}]
+%\printglossary[type=\acronymtype, title=T\'erminos y Abreviaturas]
+
+
+
+
+\end{document}

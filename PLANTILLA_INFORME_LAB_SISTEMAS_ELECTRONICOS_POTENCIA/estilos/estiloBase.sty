@@ -1,0 +1,172 @@
+%============================================================================
+%                          PLANTILLA 
+%               INGENIERÍA ELECTRONICA - UNSAAC
+%============================================================================
+
+
+
+
+\ProvidesPackage{estiloBase}
+
+% -- Paquetes de estilo del documento.
+%\usepackage[latin1]{inputenc} % Codificación de los ficheros de entrada
+\usepackage{times} 
+\usepackage[backend=biber,style=apa,natbib=true,hyperref=true,backref=false]{biblatex}
+
+
+%\DeclareFieldFormat{parens}{\textcolor{blue}{\mkbibparens{\bibstring{citeauthor}~\citeyear{#1}}}}
+\DeclareFieldFormat{cite}{\textbf{\color{blue}\hyperlink{ref-#1}{#1}}}
+
+
+
+\usepackage[T1]{fontenc} % Formato de las fuentes
+\usepackage[utf8]{inputenc}
+\usepackage[english,spanish,es-ucroman,es-tabla]{babel} % Traducción al español las tablas porque está el ingles (Table e Figure) también
+%\usepackage[spanish,english,es-ucroman,es-tabla]{babel} % Segunda opcion
+%\usepackage[spanish,es-ucroman,es-tabla]{babel} % Tercera opcion
+\usepackage{color} % Paquete de colores
+\usepackage[colorlinks=true,linkcolor=verde]{hyperref}
+                                % Añade referencias en el fichero pdf,
+                                % de color verde en este caso. Mirar
+                                % el paquete de colores para ver los
+                                % distintos colores.
+\usepackage[left=2.5cm,top=3.5cm,right=2.5cm,bottom=3.5cm]{geometry}
+                                % Sin este paquete, el fichero toma
+                                % demasiados márgenes. Con esto los
+                                % reducimos, aprovechando algo más el
+                                % folio.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% MODIFICA ESTILO DEL TÍTULO DE LOS CAPITULOS
+
+%\usepackage[Conny]{fncychap}% Sonny, Glenn, Lenny, Conny, Rejne, Bjarne
+% Este último paquete, modifica el estilo del título de los
+% capítulos. Descomentalo y prueba las 6 opciones.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% -- Paquetes matemáticos: fuentes, simbolos, teoremas...
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+
+% -- Funcionalidades extras para las tablas
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{supertabular}
+
+% -- Para mostrar código, resaltando sintaxis de muchos lenguajes de
+% -- programación, como C/C++, Java, SQL, Pascal, y un largo etc...
+\usepackage{listings}
+
+% -- Algunos paquetes más
+\usepackage{caption} % Permite añadir pies de imagen y de tabla
+\usepackage{eurosym} % Para el simbolo del euro
+\usepackage{float} % Nos permite trabajar con objetos float.
+\usepackage{fullpage} % Nos da más opciones para el formateo de una
+                      % página
+\usepackage{graphicx} % Para incluir imágenes
+\usepackage{tikz} % Parar generar gráficos avanzados
+\usepackage{anyfontsize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{eurosym}
+\usepackage[none]{hyphenat}
+\usepackage{float}
+%\usepackage[noadjust]{cite}
+\usepackage{enumitem}
+
+\usepackage{graphicx,url}
+\usepackage{graphics}
+%\usepackage[caption=false]{subfig}
+%\renewcommand\thesubfigure{\normalfont(\textbf{\alph{subfigure}})}
+
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\usepackage[nottoc]{tocbibind}  % Añade la lista de figuras y 
+\usepackage{placeins}
+
+%tablas al ??ndice%
+\usepackage{soul}			% Permite resaltar texto mediante el comando hl
+
+\usepackage{tikz}
+\usetikzlibrary{shadows.blur}
+\usetikzlibrary{shapes.symbols}
+\usetikzlibrary{shapes.geometric, arrows}
+
+
+
+% Acronimos y nomenclatura
+\usepackage[nonumberlist,style=long,sort=def,toc,xindy,acronym,nomain]{glossaries} %%% Desactivar primero esta línea cuando no salga LAS ABREVIATURAS o GLOSARIO y activa la linea siguiente
+
+%\usepackage[nonumberlist,acronym]{glossaries}      %%% OJO Segundo, Activar esto cuando no salga LAS ABREVIATURAS o GLOSARIO, luego desactivar este y activar el primero para que tenga mejor presentación en la tesis
+
+%\DeclareRobustCommand{\glossfirstformat}[1]{\textit{#1}}
+%\renewcommand*{\glsdisplayfirst}[4]{\glossfirstformat{#1#4}}
+
+\renewcommand{\glstextformat}[1]{\color{black}#1} % Cambia el color de las \gls 
+
+
+
+\makeglossaries
+
+\usepackage[spanish,intoc]{nomencl}
+\setlength{\nomlabelwidth}{1.5cm}
+
+%%%% PARA LA NOMENCLATURA
+
+\usepackage{ifthen}
+
+
+
+
+\makenomenclature
+
+\usepackage[labelformat=simple]{subcaption}
+\setcounter{secnumdepth}{4}			% Cambia hasta que punto se numeran los subapartados
+\usepackage[titletoc]{appendix}		%cambia la forma de a??adir apendices y las etiquetas en la tabla de contenidos
+
+%\graphicspath{{./images/}} % Indicamos la ruta donde se encuentran
+
+                             % las imagenes, para ahorrarnos la ruta
+                             % completa, y solo modificar aqu?? si en
+                             % un momento dado lo movemos
+
+\usepackage{amsmath} %\begin{align}
+\usepackage{amssymb}
+\interdisplaylinepenalty=2500
+\newcommand{\argmax}{\arg\!\max}
+\makeatletter
+\newenvironment{mcases}[1][l]
+ {\let\@ifnextchar\new@ifnextchar
+  \left\lbrace
+  \def\arraystretch{1.2}%
+  \array{@{}l@{\quad}l@{\quad}l@{\quad}l@{\quad}l@{\quad}l@{\quad}l@{\quad}}}
+ {\endarray\right.}
+\newenvironment{multicolumnalign}[1][l]
+ {\let\@ifnextchar\new@ifnextchar
+  \def\arraystretch{1.2}%
+  \array{@{}l@{\quad}l@{\quad}l@{\quad}l@{\quad}l@{\quad}}}
+ {\endarray}
+\newcommand{\malign}[1]{\begin{align}\begin{multicolumnalign}#1\end{multicolumnalign}\end{align}}
+\newcommand{\malignn}[1]{\begin{align*}\begin{multicolumnalign}#1\end{multicolumnalign}\end{align*}}
+\newcommand{\myargmin}{\mathop{\mathrm{argmin}}\limits}
+\newcommand{\myargmax}{\mathop{\mathrm{argmax}}\limits}
+\newtheorem{prop}{\textbf{Proposici\'on}}
+\usepackage{array}
+
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usetikzlibrary{pgfplots.groupplots, matrix,backgrounds}
+
+
+%\renewcommand\thesubfigure{\normalfont(\textbf{\alph{subfigure}})}
+\pgfplotsset{compat=1.18}       %ESTO AGREGUÉ Y NO SÉ BINE QUE HACE, SOLO QUE SALIR EN ERRORES MENORES
