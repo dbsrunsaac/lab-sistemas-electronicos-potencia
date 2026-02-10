@@ -1,0 +1,33 @@
+\UseRawInputEncoding
+\documentclass[a4paper,openany,12pt]{book}
+\input{contenido/includes.tex}
+\newcolumntype{L}{>{\centering\arraybackslash}m{4cm}} 
+\usepackage[caption=false]{subfig}
+\usepackage{dsfont}
+\usepackage{gantt}
+\usepackage[ruled,vlined]{algorithm2e}
+
+\newtheorem{defn}{Definition}[section]
+\pagenumbering{Roman}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%% list of content %%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents 
+\listoftables 
+\addcontentsline{toc}{chapter}{Lista de Tablas}
+\listoffigures 
+\addcontentsline{toc}{chapter}{Lista de Figuras}
+
+\setlength{\tabcolsep}{6pt} 
+\renewcommand{\arraystretch}{1}
+\clearpage
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{contenido/desarrollo}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{apalike}
+\bibliography{contenido/bibliog.bib}
+\end{document}
