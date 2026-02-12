@@ -5,5 +5,5 @@
 \contentsline {chapter}{Lista de Figuras}{IV}{chapter*.4}%
 \contentsline {chapter}{\numberline {1}Informe final}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Cálculo de parámetros experimentales - Rectificador trifásico media onda}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}}{1}{section.1.2}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{2}{chapter*.6}%
+\contentsline {section}{\numberline {1.2}}{3}{section.1.2}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{7}{chapter*.10}%
