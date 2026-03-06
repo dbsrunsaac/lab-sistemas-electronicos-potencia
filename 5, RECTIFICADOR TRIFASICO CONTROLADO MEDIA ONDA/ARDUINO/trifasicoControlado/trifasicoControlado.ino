@@ -63,9 +63,9 @@ void loop()
     unsigned long t0 = micros();
 
     // tiempos de disparo de cada fase
-    unsigned long tU = t0 + delay_disparo;
-    unsigned long tV = t0 + delay_disparo + fase120_us;
-    unsigned long tW = t0 + delay_disparo + (2 * fase120_us);
+    unsigned long tU = t0 + 1383 + delay_disparo;
+    unsigned long tV = t0 + 1383 + delay_disparo + fase120_us;
+    unsigned long tW = t0 + 1383 + delay_disparo + (2 * fase120_us);
 
     dispararSCR(SCR_U, tU);
     dispararSCR(SCR_V, tV);
