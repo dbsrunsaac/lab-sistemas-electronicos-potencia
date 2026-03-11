@@ -1,90 +1,99 @@
-/*
- Control de disparo de SCR trifásico usando detector de cruce por cero
+// =========================================================================
+// RECTIFICADOR TRIFÁSICO CONTROLADO - ARDUINO
+// Cruce por cero: Pin 2 (INT0)
+// SCR: Pines 8, 9, 10
+// Ángulo de disparo definido por constante
+// =========================================================================
 
- Pin 2  -> Entrada cruce por cero (PC817)
- Pin 8  -> Disparo SCR fase U
- Pin 9  -> Disparo SCR fase V
- Pin 10 -> Disparo SCR fase W
- A0     -> Potenciómetro para ajustar ángulo de disparo (0° a 110°)
-*/
+// ===============================
+// DEFINICIONES DE PINES
+// ===============================
+#define ZERO_CROSS_PIN  2
+#define SCR1_PIN        8
+#define SCR2_PIN        9
+#define SCR3_PIN        10
 
-const int zeroCrossPin = 2;
+// ===============================
+// CONSTANTES DE TIEMPO
+// ===============================
 
-const int SCR_U = 8;
-const int SCR_V = 9;
-const int SCR_W = 10;
+// Ángulo de disparo (definido como retardo en microsegundos)
+#define FIRING_DELAY_US   3688 // corresponde aprox. a 80°–90° a 60 Hz
 
-const int potPin = A0;
+// Desfase entre fases (120° en 60 Hz)
+#define PHASE_SHIFT_US    5556
 
-volatile bool zeroCrossDetected = false;
+// Ancho del pulso de compuerta del SCR
+#define PULSE_WIDTH_US   6916 - FIRING_DELAY_US 
 
-unsigned long zeroTime = 0;
+// ===============================
+// VARIABLES GLOBALES
+// ===============================
+volatile bool newZeroCross = false;
 
-// parámetros del sistema
-const float frecuencia = 60.0;
-const float semiPeriodo_us = 8333;   // medio ciclo en microsegundos
-const float fase120_us = 5533;       // separación entre fases (120°)
-
-int angulo = 0;
-unsigned long delay_disparo = 0;
-
-void setup()
+// ===============================
+// INTERRUPCIÓN DE CRUCE POR CERO
+// ===============================
+void zeroCrossISR()
 {
-  pinMode(zeroCrossPin, INPUT);
-
-  pinMode(SCR_U, OUTPUT);
-  pinMode(SCR_V, OUTPUT);
-  pinMode(SCR_W, OUTPUT);
-
-  digitalWrite(SCR_U, LOW);
-  digitalWrite(SCR_V, LOW);
-  digitalWrite(SCR_W, LOW);
-
-  attachInterrupt(digitalPinToInterrupt(zeroCrossPin), zeroCrossISR, RISING);
-
-  Serial.begin(9600);
+  newZeroCross = true;
 }
 
+// ===============================
+// SETUP
+// ===============================
+void setup()
+{
+  // Configurar salidas de SCR
+  pinMode(SCR1_PIN, OUTPUT);
+  pinMode(SCR2_PIN, OUTPUT);
+  pinMode(SCR3_PIN, OUTPUT);
+
+  digitalWrite(SCR1_PIN, LOW);
+  digitalWrite(SCR2_PIN, LOW);
+  digitalWrite(SCR3_PIN, LOW);
+
+  // Configurar entrada de cruce por cero
+  pinMode(ZERO_CROSS_PIN, INPUT);
+
+  attachInterrupt(digitalPinToInterrupt(ZERO_CROSS_PIN), zeroCrossISR, RISING);
+}
+
+// ===============================
+// LOOP PRINCIPAL
+// ===============================
 void loop()
 {
-  // Leer potenciometro y convertir a angulo (0° a 110°)
-  int potValue = analogRead(potPin);
-  angulo = map(potValue, 0, 1023, 0, 110);
-  Serial.println(angulo);
-
-  // convertir angulo a tiempo
-  delay_disparo = angulo*16667/360;
-
-  if (zeroCrossDetected)
+  if (newZeroCross)
   {
-    zeroCrossDetected = false;
-
-    // tiempo base desde cruce por cero
-    unsigned long t0 = micros();
-
-    // tiempos de disparo de cada fase
-    unsigned long tU = t0 + 1383 + delay_disparo;
-    unsigned long tV = t0 + 1383 + delay_disparo + fase120_us;
-    unsigned long tW = t0 + 1383 + delay_disparo + (2 * fase120_us);
-
-    dispararSCR(SCR_U, tU);
-    dispararSCR(SCR_V, tV);
-    dispararSCR(SCR_W, tW);
-    Serial.println("SRC disparados");
+    newZeroCross = false;
+    triggerSCRSequence();
   }
 }
 
-void dispararSCR(int pin, unsigned long tiempoDisparo)
+// ===============================
+// SECUENCIA DE DISPARO
+// ===============================
+void triggerSCRSequence()
 {
-  while (micros() < tiempoDisparo);
+  // ---- FASE A ----
+  delayMicroseconds(FIRING_DELAY_US);
 
-  digitalWrite(pin, HIGH);
-  delayMicroseconds(100);   // pulso de compuerta
-  digitalWrite(pin, LOW);
+  digitalWrite(SCR1_PIN, HIGH);
+  delayMicroseconds(PULSE_WIDTH_US);
+  digitalWrite(SCR1_PIN, LOW);
+
+  // ---- FASE B (120° después) ----
+  delayMicroseconds(PHASE_SHIFT_US);
+
+  digitalWrite(SCR2_PIN, HIGH);
+  delayMicroseconds(PULSE_WIDTH_US);
+  digitalWrite(SCR2_PIN, LOW);
+
+  // ---- FASE C (240° después) ----
+  delayMicroseconds(PHASE_SHIFT_US);
+
+  digitalWrite(SCR3_PIN, HIGH);
+  delayMicroseconds(PULSE_WIDTH_US);
+  digitalWrite(SCR3_PIN, LOW);
 }
-
-void zeroCrossISR()
-{
-  zeroCrossDetected = true;
-}
-
