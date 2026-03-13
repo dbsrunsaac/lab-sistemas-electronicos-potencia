@@ -1,3 +1,57 @@
 \chapter{Desarrollo}
 
-\section{Seccion I}
+\section{Determinar los parámetros del rectificador trifásico}
+
+Para la obtención de los parámetros del rectificador se considerar sus variables electricas entre ellas:
+
+\begin{itemize}
+	\item Voltaje pico
+	\item Voltaje medio y RMS
+	\item Corriente media y RMS
+	\item Potencia dc
+	\item Potencia ac
+	\item Factor de forma 
+	\item Rizado
+	\item Frecuencia
+	\item PIV (Voltaje pico inverso)
+	\item Frecuencia de la señal de salida
+\end{itemize}
+
+Siendo así que para su obtención se realizaron las mediciones al circuito implementado \ref{fig:rectificador-3p} cuyos valores se validaron con los teóricos en función a las relaciones que describen el comportamiento del rectificador.
+
+% TODO: \usepackage{graphicx} required
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{media/rectificador-3p}
+	\caption{Rectificador trifásico a onda completa}
+	\label{fig:rectificador-3p}
+\end{figure}
+
+Finalmente los valores calculados se muestra en la tabla \ref{tab:valores-rect-3p}
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\begin{table}[]
+	\centering
+	\begin{tabular}{|cc|cc|lc|}
+		\hline
+		\multicolumn{2}{|c|}{\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Rectificador Carga R\\ R = 1973 Ohm\end{tabular}}}} & \multicolumn{2}{c|}{\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Rectificador Carga RC\\ C = 47uF\end{tabular}}}} & \multicolumn{2}{c|}{\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Parámetros de desempeño\\ Carga R\end{tabular}}}}                                                                                                                                                                 \\
+		\multicolumn{2}{|c|}{}                                                                                                      & \multicolumn{2}{c|}{}                                                                                                   & \multicolumn{2}{c|}{}                                                                                                                                                                                                                                                                    \\ \hline
+		\multicolumn{1}{|c|}{\textbf{Teórico}}                                  & \textbf{Práctico}                                 & \multicolumn{1}{c|}{\textbf{Teórico}}                                & \textbf{Práctico}                                & \multicolumn{1}{l|}{\textbf{Pac}}                                                                                                                           & 6.6703                                                                                                                     \\ \hline
+		\multicolumn{1}{|c|}{Vm}                                                & Vm                                                & \multicolumn{1}{c|}{Vm}                                              & Vm                                               & \multicolumn{1}{l|}{\textbf{Pdc}}                                                                                                                           & 6.6582                                                                                                                     \\ \hline
+		\multicolumn{1}{|c|}{66.4680}                                           & 69.2964                                           & \multicolumn{1}{c|}{66.4680}                                         & 69.2964                                          & \multicolumn{1}{l|}{\textbf{n}}                                                                                                                             & 0.9981                                                                                                                     \\ \hline
+		\multicolumn{1}{|c|}{Vmedio}                                            & Vmedio                                            & \multicolumn{1}{c|}{Vmedio}                                          & Vmedio                                           & \multicolumn{1}{l|}{\textbf{FF}}                                                                                                                            & 1.0009114                                                                                                                  \\ \hline
+		\multicolumn{1}{|c|}{109.9372}                                          & 114.6154                                          & \multicolumn{1}{c|}{65.782}                                          & 67.2                                             & \multicolumn{1}{l|}{\textbf{TUF}}                                                                                                                           & 0.3327                                                                                                                     \\ \hline
+		\multicolumn{1}{|c|}{Vrms}                                              & Vrms                                              & \multicolumn{1}{c|}{Vrms}                                            & Vrms                                             & \multicolumn{1}{l|}{\textbf{FP}}                                                                                                                            & 0.9981                                                                                                                     \\ \hline
+		\multicolumn{1}{|c|}{110.0374}                                          & 114.7198                                          & \multicolumn{1}{c|}{66.429}                                          & 67.3                                             & \multicolumn{1}{l|}{\textbf{PIV (Diodo)}}                                                                                                                   & 130                                                                                                                        \\ \hline
+		\multicolumn{1}{|c|}{Imedia}                                            & Imedia                                            & \multicolumn{1}{c|}{Imedia}                                          & Imedia                                           & \multicolumn{1}{l|}{\textbf{Ip (Diodo)}}                                                                                                                    & 0.05814                                                                                                                    \\ \hline
+		\multicolumn{1}{|c|}{0.05526}                                           & 0.05809                                           & \multicolumn{1}{c|}{0.0332}                                          & 0.03405                                          & \multicolumn{1}{l|}{\textbf{Frecuencia}}                                                                                                                    & 178.6                                                                                                                      \\ \hline
+		\multicolumn{1}{|c|}{Irms}                                              & Irms                                              & \multicolumn{1}{c|}{Irms}                                            & Irms                                             & \multicolumn{2}{l|}{\multirow{4}{*}{\begin{tabular}[c]{@{}l@{}}Observaciones: En la experimentación\\ las características físicas de la líneas\\ como un pequeño desajuste en el desfase\\ generan variaciones en la respuestas en \\ comparación a los valores teóricos.\end{tabular}}} \\ \cline{1-4}
+		\multicolumn{1}{|c|}{0.05577}                                           & 0.05814                                           & \multicolumn{1}{c|}{0.0336}                                          & 0.03411                                          & \multicolumn{2}{l|}{}                                                                                                                                                                                                                                                                    \\ \cline{1-4}
+		\multicolumn{1}{|c|}{r (rizado)}                                        & r (rizado)                                        & \multicolumn{1}{c|}{r (rizado)}                                      & r (rizado)                                       & \multicolumn{2}{l|}{}                                                                                                                                                                                                                                                                    \\ \cline{1-4}
+		\multicolumn{1}{|c|}{0.043}                                             & 0.04270                                           & \multicolumn{1}{c|}{0.053}                                           & 0.05474                                          & \multicolumn{2}{l|}{}                                                                                                                                                                                                                                                                    \\ \hline
+	\end{tabular}
+	\caption{Parámetros eléctricos del rectificador trifásico - puente de diodos}
+	\label{tab:valores-rect-3p}
+\end{table}
+
