@@ -1,0 +1,36 @@
+\chapter{Desarrollo}
+
+\section{Calcule los valores teóricos y determine los valores experimentales del rectificador controlado a media monofásico}
+
+En función a la teoria vista y la implementación realizada en el laboratorio se tiene la tabla \ref{tab:parametros-rect-controlado} que describe además los valores de voltaje y corriente de excitación para activar el tiristor BT151.
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|cc|lc|}
+		\hline
+		\multicolumn{2}{|c|}{\textbf{Valores para $\alpha$ = 60º}}               & \multicolumn{2}{c|}{\textbf{Caracterización del SCR}}                                                                                                                                          \\ \hline
+		\multicolumn{1}{|c|}{\textbf{Teórico}}    & \textbf{Práctico}   & \multicolumn{1}{l|}{\textbf{Vgt}}                                                                                & 0.67 V                                                                      \\ \hline
+		\multicolumn{1}{|c|}{\textbf{Potencia P}} & \textbf{Potencia P} & \multicolumn{1}{l|}{\textbf{Igt}}                                                                                & 4.234 mA                                                                    \\ \hline
+		\multicolumn{1}{|c|}{3.679}               & 2.8952              & \multicolumn{1}{l|}{\textbf{Req para = $\alpha$ 60º}}                                                                     & 3.904 K Ohm                                                                 \\ \hline
+		\multicolumn{1}{|c|}{\textbf{Vmedio}}     & \textbf{Vmedio}     & \multicolumn{1}{l|}{\textbf{$\alpha$ experimental}}                                                                 & 80.4                                                                        \\ \hline
+		\multicolumn{1}{|c|}{3.545}               & 2.91               & \multicolumn{1}{l|}{\textbf{er\% de alpha}}                                                                      & 34                                                                          \\ \hline
+		\multicolumn{1}{|c|}{\textbf{Vrms}}       & \textbf{Vrms}       & \multicolumn{2}{l|}{\multirow{2}{*}{}} \\ \cline{1-2}
+		\multicolumn{1}{|c|}{7.4293}              & 6.59                & \multicolumn{2}{l|}{}                                                                                                                                                                          \\ \hline
+	\end{tabular}
+	\caption{Parámetros eléctricos rectificador controlado media onda monofásico}
+	\label{tab:parametros-rect-controlado}
+\end{table}
+
+\section{Máxima y mínima potencia que se puede controlar con este rectificador con el SCR en conducción}
+
+Durante las diferentes pruebas realizadas con el circuito implementado \ref{fig:imp-rec-controlado-mono} se comprobaron las potencia de salida en función del voltaje rms medido obteniendo una potencia de 2.5626W y 2.8995 para un angulo de disparo 0º y 80.4º respectivamente.
+
+Lo cual demuestra la efectividad del circuito para el control de potencia en la carga mediante la limitación en la señal de entrada.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{"media/imp-rec-controlado-mono"}
+	\caption{Implementación del rectificador monofásico controlado}
+	\label{fig:imp-rec-controlado-mono}
+\end{figure}
